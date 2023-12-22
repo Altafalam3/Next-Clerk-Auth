@@ -2,6 +2,11 @@
 import { useState } from 'react';
 import { useSignUp } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
+import { createUser } from '@/lib/actions/user.actions';
+
+import { v4 as uuidv4 } from 'uuid';
+
+// import { usePathname } from 'next/navigation';
 
 const Signup = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -12,6 +17,8 @@ const Signup = () => {
   const [pendingVerification, setPendingVerification] = useState<boolean>(false);
   const [code, setCode] = useState<string>('');
   const router = useRouter();
+
+  // const pathname = usePathname();
 
   // Form Submit
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -57,6 +64,16 @@ const Signup = () => {
       }
       if (completeSignUp.status === 'complete') {
         await setActive({ session: completeSignUp.createdSessionId });
+
+        await createUser({
+          id: uuidv4(), // Generate a v4 UUID for the user ID
+          email,
+          firstName,
+          lastName,
+          password,
+          // path:pathname,
+        });
+
         router.push('/');
       }
     } catch (err) {

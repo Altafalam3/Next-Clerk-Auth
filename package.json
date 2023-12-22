@@ -12,10 +12,13 @@
     "@clerk/nextjs": "^4.29.0",
     "@clerk/themes": "^1.7.9",
     "axios": "^1.5.1",
+    "mongoose": "^8.0.3",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "supports-color": "^8.1.1"
+    "supports-color": "^8.1.1",
+    "svix": "^1.15.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "latest",
